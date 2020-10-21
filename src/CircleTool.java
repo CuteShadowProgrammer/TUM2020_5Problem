@@ -98,7 +98,7 @@ public class CircleTool extends Main {
      */
     public static BufferedImage imageOfTableFor(int n) {
         int[][] table = createTableFor(n);
-        int c = Math.min(MAX_CELL_SIZE, 1000 / table.length); // c - current cell size.
+        int c = Math.min(MAX_CELL_SIZE, Math.max(1000 / table.length, 1)); // c - current cell size.
         int s = c / 10, m = table.length; // s - indent from edges of cell.
         int b = Math.max(1, s), v; // b - size of blue square.
         int width = n * c, height = m * c;
