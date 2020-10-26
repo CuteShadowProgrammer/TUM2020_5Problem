@@ -19,7 +19,7 @@ public class CircleTool extends Main {
      */
     public static int resultFor(int n) {
         if (n < 3) throw new IllegalArgumentException("N must be not less than 3: " + n);
-        return n == 3 || n == 4 ? 2 : n % 2 == 0 ? n - 1 : n;
+        return n % 2 == 0 ? n - 2 : n - 1;
     }
 
     /**
@@ -28,41 +28,36 @@ public class CircleTool extends Main {
      */
     public static int[][] createTableFor(int n) {
         if (n < 3) throw new IllegalArgumentException("N must be not less than 3: " + n);
-        if (n == 3) return new int[][]{{V, 0, V}, {V, X, V}};
-        if (n == 4) return new int[][]{{V, 0, V, 0}, {V, X, V, X}};
         int[][] res = new int[resultFor(n)][n];
         res[0][0] = V;
         res[0][n - 2] = V;
-        res[1][0] = V;
-        res[1][n - 2] = V;
-        res[1][n - 1] = X;
         if (n % 2 == 0) {
             for (int i = 1; i < n / 2 - 1; i++) {
-                res[1 + i][i] = V;
-                for (int j = i - 2; j >= 0; j -= 2) res[1 + i][j] = X;
-                res[1 + i][n - 2 - i] = V;
-                for (int j = n - i; j < n; j += 2) res[1 + i][j] = X;
+                res[i][i] = V;
+                for (int j = i - 2; j >= 0; j -= 2) res[i][j] = X;
+                res[i][n - 2 - i] = V;
+                for (int j = n - i; j < n; j += 2) res[i][j] = X;
             }
             for (int i = 0; i < n / 2 - 1; i++) {
-                res[n / 2 + i][n / 2 - i - 2] = V;
-                for (int j = n / 2 - i - 3; j >= 0; j -= 2) res[n / 2 + i][j] = X;
-                res[n / 2 + i][n / 2 + i] = V;
-                for (int j = n / 2 + i + 1; j < n; j += 2) res[n / 2 + i][j] = X;
-                for (int j = n / 2 - i - 1; j < n / 2 + i; j++) res[n / 2 + i][j] = X;
+                res[n / 2 + i - 1][n / 2 - i - 2] = V;
+                for (int j = n / 2 - i - 3; j >= 0; j -= 2) res[n / 2 + i - 1][j] = X;
+                res[n / 2 + i - 1][n / 2 + i] = V;
+                for (int j = n / 2 + i + 1; j < n; j += 2) res[n / 2 + i - 1][j] = X;
+                for (int j = n / 2 - i - 1; j < n / 2 + i; j++) res[n / 2 + i - 1][j] = X;
             }
         } else {
             for (int i = 1; i < n / 2; i++) {
-                res[1 + i][i] = V;
-                for (int j = i - 2; j >= 0; j -= 2) res[1 + i][j] = X;
-                res[1 + i][n - 2 - i] = V;
-                for (int j = n - i; j < n; j += 2) res[1 + i][j] = X;
+                res[i][i] = V;
+                for (int j = i - 2; j >= 0; j -= 2) res[i][j] = X;
+                res[i][n - 2 - i] = V;
+                for (int j = n - i; j < n; j += 2) res[i][j] = X;
             }
             for (int i = 0; i < n / 2; i++) {
-                res[n / 2 + i + 1][n / 2 - i - 1] = V;
-                for (int j = n / 2 - i - 2; j >= 0; j -= 2) res[n / 2 + i + 1][j] = X;
-                res[n / 2 + i + 1][n / 2 + i] = V;
-                for (int j = n / 2 + i + 1; j < n; j += 2) res[n / 2 + i + 1][j] = X;
-                for (int j = n / 2 - i; j < n / 2 + i; j++) res[n / 2 + i + 1][j] = X;
+                res[n / 2 + i][n / 2 - i - 1] = V;
+                for (int j = n / 2 - i - 2; j >= 0; j -= 2) res[n / 2 + i][j] = X;
+                res[n / 2 + i][n / 2 + i] = V;
+                for (int j = n / 2 + i + 1; j < n; j += 2) res[n / 2 + i][j] = X;
+                for (int j = n / 2 - i; j < n / 2 + i; j++) res[n / 2 + i][j] = X;
             }
         }
         return res;

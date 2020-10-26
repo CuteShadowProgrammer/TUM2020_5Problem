@@ -19,7 +19,7 @@ public class LineTool extends Main {
      */
     public static int resultFor(int n) {
         if (n < 3) throw new IllegalArgumentException("N must be not less than 3: " + n);
-        return n == 3 ? 2 : 2 * n - 3;
+        return 2 * n - 4;
     }
 
     /**
@@ -28,18 +28,14 @@ public class LineTool extends Main {
      */
     public static int[][] createTableFor(int n) {
         if (n < 3) throw new IllegalArgumentException("N must be not less than 3: " + n);
-        if (n == 3) return new int[][]{{0, V, 0}, {X, V, X}};
         int[][] res = new int[resultFor(n)][n];
-        res[0][1] = V;
-        res[1][1] = V;
-        res[1][0] = X;
-        for (int i = 2; i < n - 1; i++) {
-            res[i][i] = V;
-            for (int j = i - 2; j >= 0; j -= 2) res[i][j] = X;
+        for (int i = 1; i < n - 1; i++) {
+            res[i - 1][i] = V;
+            for (int j = i - 2; j >= 0; j -= 2) res[i - 1][j] = X;
         }
         int v;
         for (int i = n - 2; i > 0; i--) {
-            res[v = (n + n - i - 3)][i] = V;
+            res[v = (n + n - i - 4)][i] = V;
             for (int j = i + 1; j < n; j++) res[v][j] = X;
             for (int j = i - 1; j >= 0; j -= 2) res[v][j] = X;
         }
